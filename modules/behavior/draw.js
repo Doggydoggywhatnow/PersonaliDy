@@ -34,6 +34,7 @@ export function behaviorDraw(context) {
     var _lastPointerUpEvent;
 
     var _downPointer;
+    var _dragPointTolerance = 16;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -68,7 +69,8 @@ export function behaviorDraw(context) {
             id: d3_event.pointerId || 'mouse',
             pointerLocGetter: pointerLocGetter,
             downTime: +new Date(),
-            downLoc: pointerLocGetter(d3_event)
+            downLoc: pointerLocGetter(d3_event),
+	    isDragging: false
         };
 
         dispatch.call('down', this, d3_event, datum(d3_event));
@@ -83,7 +85,7 @@ export function behaviorDraw(context) {
 
         _lastPointerUpEvent = d3_event;
 
-        if (downPointer.isCancelled) return;
+        if (downPointer.isCancelled || downPointer.isDragging) return;
 
         var t2 = +new Date();
         var p2 = downPointer.pointerLocGetter(d3_event);
@@ -113,15 +115,15 @@ export function behaviorDraw(context) {
             !_downPointer.isCancelled) {
             var p2 = _downPointer.pointerLocGetter(d3_event);
             var dist = geoVecLength(_downPointer.downLoc, p2);
-            if (dist >= _closeTolerance) {
-                _downPointer.isCancelled = true;
-                dispatch.call('downcancel', this);
-            }
+            if (dist >= _dragPointTolerance) {
+    _downPointer.isDragging = true;
+    dispatch.call('downcancel', this);
+    dispatch.call('click', this, context.projection.invert(p2), datum(d3_event));
+    _lastMouse = d3_event;
+}
         }
 
-        if ((d3_event.pointerType && d3_event.pointerType !== 'mouse') ||
-            d3_event.buttons ||
-            _downPointer) return;
+        if (d3_event.pointerType && d3_event.pointerType !== 'mouse') return;
 
         // HACK: Mobile Safari likes to send one or more `mouse` type pointermove
         // events immediately after non-mouse pointerup events; detect and ignore them.
@@ -129,8 +131,13 @@ export function behaviorDraw(context) {
             _lastPointerUpEvent.pointerType !== 'mouse' &&
             d3_event.timeStamp - _lastPointerUpEvent.timeStamp < 100) return;
 
-        _lastMouse = d3_event;
-        dispatch.call('move', this, d3_event, datum(d3_event));
+        if (_downPointer?.isDragging) {
+    dispatch.call('move', this, d3_event, datum(d3_event));
+    return;
+}
+
+_lastMouse = d3_event;
+dispatch.call('move', this, d3_event, datum(d3_event));
     }
 
     function pointercancel(d3_event) {

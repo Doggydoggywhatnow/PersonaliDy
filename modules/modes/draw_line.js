@@ -2,10 +2,11 @@ import { t } from '../core/localizer';
 import { behaviorDrawWay } from '../behavior/draw_way';
 
 
-export function modeDrawLine(context, wayID, startGraph, button, affix, continuing) {
+export function modeDrawLine(context, wayID, startGraph, button, affix, continuing, quickdraw) {
     var mode = {
         button: button,
-        id: 'draw-line'
+        id: 'draw-line',
+	quickdraw: quickdraw
     };
 
     var behavior = behaviorDrawWay(context, wayID, mode, startGraph)

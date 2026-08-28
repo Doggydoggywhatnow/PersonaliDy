@@ -14,6 +14,7 @@ import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
+import { uiModal } from '../modal';
 
 export function uiToolDrawModes(context) {
 
@@ -159,6 +160,68 @@ export function uiToolDrawModes(context) {
                 .attr('aria-pressed', function(d) { return context.mode() && context.mode().button === d.button; })
                 .classed('active', function(d) { return context.mode() && context.mode().button === d.button; });
         }
+    };
+
+    return tool;
+}
+
+export function uiToolQuickdraw(context) {
+    var tool = {
+        id: 'quickdraw',
+        label: function(selection) { selection.text('Quickdraw'); }
+    };
+
+    tool.render = function(selection) {
+        selection
+            .append('button')
+            .attr('class', 'quickdraw bar-button')
+            .text('Quickdraw')
+            .on('click.quickdraw', function() {
+                var modal = uiModal(context.container());
+                var content = modal.select('.content');
+
+                content
+                    .append('div')
+                    .attr('class', 'modal-section header')
+                    .append('h3')
+                    .text('Quickdraw');
+
+                var buttons = content
+                    .append('div')
+                    .attr('class', 'modal-section buttons cf');
+
+                buttons
+                    .append('button')
+                    .attr('class', 'button action')
+                    .text('Quickdraw Line')
+                    .on('click', function() {
+                        modal.close();
+                        context.enter(modeAddLine(context, {
+                            title: t.append('modes.add_line.title'),
+                            button: 'line',
+                            description: t.append('modes.add_line.description'),
+                            preset: presetManager.item('line'),
+                            key: '2',
+			    quickdraw: true
+                        }));
+                    });
+
+                buttons
+                    .append('button')
+                    .attr('class', 'button action')
+                    .text('Quickdraw Area')
+                    .on('click', function() {
+                        modal.close();
+                        context.enter(modeAddArea(context, {
+                            title: t.append('modes.add_area.title'),
+                            button: 'area',
+                            description: t.append('modes.add_area.description'),
+                            preset: presetManager.item('area'),
+                            key: '3',
+			    quickdraw: true
+                        }));
+                    });
+            });
     };
 
     return tool;

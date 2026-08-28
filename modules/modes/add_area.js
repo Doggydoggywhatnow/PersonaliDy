@@ -40,7 +40,7 @@ export function modeAddArea(context, mode) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, mode.button));
+        context.enter(modeDrawArea(context, way.id, startGraph, mode.button, undefined, undefined, mode.quickdraw));
     }
 
 
@@ -57,7 +57,7 @@ export function modeAddArea(context, mode) {
             actionAddMidpoint({ loc: loc, edge: edge }, node)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, mode.button));
+        context.enter(modeDrawArea(context, way.id, startGraph, mode.button, undefined, undefined, mode.quickdraw));
     }
 
 
@@ -71,7 +71,7 @@ export function modeAddArea(context, mode) {
             actionClose(way.id)
         );
 
-        context.enter(modeDrawArea(context, way.id, startGraph, mode.button));
+        context.enter(modeDrawArea(context, way.id, startGraph, mode.button, undefined, undefined, mode.quickdraw));
     }
 
 

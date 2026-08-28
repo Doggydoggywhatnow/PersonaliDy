@@ -37,6 +37,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // The osmNode to be placed.
     // This is temporary and just follows the mouse cursor until an "add" event occurs.
     var _drawNode;
+    var _quickdrawDistance= 25;
 
     var _didResolveTempEdit = false;
 
@@ -134,6 +135,32 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         context.replace(actionMoveNode(_drawNode.id, loc), _annotation);
         _drawNode = context.entity(_drawNode.id);
         checkGeometry(true /* includeDrawNode */);
+	if (!mode.quickdraw) return;
+
+var way = context.graph().entity(wayID);
+var nodes = way.nodes;
+
+if (nodes.length < 2) return;
+
+var lastCommittedID = way.isClosed()
+    ? nodes[nodes.length - 3]
+    : nodes[nodes.length - 2];
+var lastCommitted = context.graph().entity(lastCommittedID);
+
+if (!lastCommitted) return;
+
+var lastScreen = context.projection(lastCommitted.loc);
+var currentScreen = context.map().mouse();
+
+var dx = currentScreen[0] - lastScreen[0];
+var dy = currentScreen[1] - lastScreen[1];
+var distance = Math.sqrt(dx * dx + dy * dy);
+
+if (distance < _quickdrawDistance) return;
+
+attemptAdd(null, loc, function() {
+    // Don't need to do anything extra
+});
     }
 
 
@@ -273,8 +300,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
                 move.apply(this, arguments);
             })
             .on('downcancel', function() {
-                if (_drawNode) removeDrawNode();
-            })
+    if (_drawNode && !_pointerHasMoved) removeDrawNode();
+})
             .on('click', drawWay.add)
             .on('clickWay', drawWay.addWay)
             .on('clickNode', drawWay.addNode)
