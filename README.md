@@ -9,8 +9,8 @@
 
 ## Added Features... So Far!
 
-* Rapid node editing: one is able to select specific tags and place as many nodes as they wish without copy and pasting that carry those same tags.
-* Zoom preferences: one is able to set the max zoom level of the aerial imagery, allowing one to zoom in closer without double clicking.
+* **Rapid node editing**: one is able to select specific tags and place as many nodes as they wish without copy and pasting that carry those same tags.
+* **Zoom preferences**: one is able to set the max zoom level of the aerial imagery, allowing one to zoom in closer without double clicking.
 
 ## Participate!
 
