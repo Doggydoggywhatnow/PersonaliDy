@@ -25,6 +25,10 @@ Join the OpenStreetMap community!
 
 Download PersonaliDy as a zip file, or clone it where you wish, then install npm itself onto your system. open a terminal in the folder for PersonaliDy, run npm install, and then run npm start. This should open up a localhost for you to use PersonaliDy in your browser.
 
+## Issues
+
+ * The locator overlay is not working, which is very troublesome. However, nominatim works and is a decent replacement until the locator overlay gets sorted out.
+
 ## License
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
