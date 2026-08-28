@@ -5,37 +5,35 @@
 ## Basics
 
 * iD is a JavaScript [OpenStreetMap](https://www.openstreetmap.org/) editor.
-* It's intentionally simple. It lets you do the most basic tasks while not breaking other people's data.
-* It supports all popular modern desktop browsers: Chrome, Firefox, Safari, Opera, and Edge.
-* Data is rendered with [d3.js](https://d3js.org/).
+* PersonaliDy is a fork of iD that adds new features for experienced users.
+
+## Added Features... So Far!
+
+* Rapid node editing: one is able to select specific tags and place as many nodes as they wish without copy and pasting that carry those same tags.
+* Zoom preferences: one is able to set the max zoom level of the aerial imagery, allowing one to zoom in closer without double clicking.
 
 ## Participate!
 
-* Read the project [Code of Conduct](CODE_OF_CONDUCT.md) and remember to be nice to one another.
-* Read up on [Contributing and the code style of iD](CONTRIBUTING.md).
-* See [open issues in the issue tracker](https://github.com/openstreetmap/iD/issues?state=open)
-if you're looking for something to do.
-* [Translate!](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating)
-* Test a prerelease version of iD:
-  * Stable mirror of `release` branch: https://ideditor-release.netlify.app
-  * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
-* Expect regular update releases of iD about every month.
+* Remember to be nice to one another.
 
-Come on in, the water's lovely. More help?
-* [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
-* [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) (`#id-and-rapid` channel)
+Join the OpenStreetMap community!
+* [OpenStreetMap US Slack](https://slack.openstreetmap.us/) 
+* [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) 
 * [OpenStreetMap community forum](https://community.openstreetmap.org/)
 
 ## Installation
 
-Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to install, build and run iD locally.
+Download PersonaliDy as a zip file, or clone it where you wish, then install npm, open a terminal in the folder for PersonaliDy, and run npm start.
 
 ## License
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
+
+Thusly, PersonaliDy is available under the same license, the [ISC License](https://opensource.org/licenses/ISC).
+
 See the [LICENSE.md](LICENSE.md) file for more details.
 
-iD also bundles portions of the following open source software.
+iD, and thusly PersonaliDy, also bundles portions of the following open source software.
 
 * [D3.js (BSD-3-Clause)](https://github.com/d3/d3)
 * [CLDR (Unicode Consortium Terms of Use)](https://github.com/unicode-cldr/cldr-json)
