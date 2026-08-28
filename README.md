@@ -1,4 +1,4 @@
-# iD - friendly JavaScript editor for [OpenStreetMap](https://www.openstreetmap.org/)
+# PersonaliDy - A Vibecoded iD Fork For Powermapping
 
 [![build](https://github.com/openstreetmap/iD/workflows/build/badge.svg)](https://github.com/openstreetmap/iD/actions?query=workflow%3A%22build%22)
 
