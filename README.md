@@ -10,6 +10,7 @@
 ## Added Features... So Far!
 
 * **Rapid node editing**: one is able to select specific tags and place as many nodes as they wish without copy and pasting that carry those same tags.
+* **Quickdraw**: one is able to drag the cursor to continually place nodes that form a line or area, allowing the user to map curves of lines or areas with minimal clicking.
 * **Zoom preferences**: one is able to set the max zoom level of the aerial imagery, allowing one to zoom in closer without double clicking.
 
 ## Participate!
