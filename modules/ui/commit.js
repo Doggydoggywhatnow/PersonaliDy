@@ -87,7 +87,7 @@ export function uiCommit(context) {
         var detected = utilDetect();
         var tags = {
             comment: prefs('comment') || '',
-            created_by: context.cleanTagValue('iD ' + context.version),
+            created_by: context.cleanTagValue('PersonaliDy ' + context.version),
             host: context.cleanTagValue(detected.host),
             locale: context.cleanTagValue(localizer.localeCode())
         };

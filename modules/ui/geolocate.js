@@ -43,8 +43,10 @@ export function uiGeolocate(context) {
         context.enter(modeBrowse(context));
 
         var map = context.map();
-        _layer.enabled(_position, true);
-        updateButtonState();
+        console.log('GEO ENABLE', _position, _layer);
+_layer.enabled(_position, true);
+console.log('GEO STATE AFTER', _layer.enabled());
+updateButtonState();
         map.centerZoomEase(_extent.center(), Math.min(20, map.extentZoom(_extent)));
     }
 
