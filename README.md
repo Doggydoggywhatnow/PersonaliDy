@@ -23,7 +23,7 @@ Join the OpenStreetMap community!
 
 ## Installation
 
-Download PersonaliDy as a zip file, or clone it where you wish, then install npm, open a terminal in the folder for PersonaliDy, and run npm start.
+Download PersonaliDy as a zip file, or clone it where you wish, then install npm itself onto your system. open a terminal in the folder for PersonaliDy, run npm install, and then run npm start. This should open up a localhost for you to use PersonaliDy in your browser.
 
 ## License
 
