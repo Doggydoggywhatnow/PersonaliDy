@@ -5,12 +5,12 @@ name: build
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   FORCE_COLOR: 2
@@ -35,6 +35,13 @@ jobs:
     - run: npm audit signatures
     - run: npm run all
     - run: npm run test
+    - name: Deploy to GitHub Pages
+      if: ${{ github.event_name == 'push' && matrix.node-version.isLatest }}
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: dist
+        single-commit: true
 
     - name: '[PR Preview] Upload dist folder'
       if: ${{github.event_name == 'pull_request' && matrix.node-version.isLatest}}
