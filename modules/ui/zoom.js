@@ -45,12 +45,6 @@ export function uiZoom(context) {
         context.map().zoomOut();
     }
 
-    function zoomInFurther(d3_event) {
-        if (d3_event.shiftKey) return;
-        d3_event.preventDefault();
-        context.map().zoomInFurther();
-    }
-
     function zoomOutFurther(d3_event) {
         if (d3_event.shiftKey) return;
         d3_event.preventDefault();
