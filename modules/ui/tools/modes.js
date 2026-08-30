@@ -15,7 +15,7 @@ import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiModal } from '../modal';
-import { node2areaActive, node2areaMode, node2areaSetActive, node2areaSetMode } from '../../core/node2area_state';
+import { node2areaActive, node2areaSetActive, node2areaSetMode } from '../../core/node2area_state';
 
 export function uiToolDrawModes(context) {
 
