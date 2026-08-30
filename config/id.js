@@ -9,13 +9,12 @@ const wmfSitematrixCdnUrl = ENV__ID_WMF_SITEMATRIX_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/wmf-sitematrix@{version}/';
 const nsiCdnUrl = ENV__ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
-
 // api urls and settings
 const defaultOsmApiConnections = {
   live: {
     url: 'https://www.openstreetmap.org',
     apiUrl: 'https://api.openstreetmap.org',
-    client_id: '6JvjYX71rDwWV9fAB-U5HuIjzHmJzRRvo5gXsbvgQQs'
+    client_id: 'HnTg7VsA05OyWr1SsL9gLzKr5D85IhlX9FSfliJy1v4'
   },
   dev: {
     url: 'https://api06.dev.openstreetmap.org',
