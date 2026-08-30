@@ -12,7 +12,7 @@
 * **Rapid node editing**: one is able to select specific tags and place as many nodes as they wish without copy and pasting that carry those same tags. This helps with repetitive mapping of the same feature as a node.
 * **Quickdraw**: one is able to drag the cursor to continually place nodes that form a line or area, allowing the user to map curves of lines or areas with minimal clicking. This helps with creating smoother curves and mapping curvy features quicker.
 * **Zoom preferences**: one is able to set the max zoom level of the aerial imagery, allowing one to zoom in closer without double clicking. This can help with some tasks where being close to the edge of the feature is important, for example pool mapping.
-* **Node2Area**: a toggle that allows one to draw an area, either having the area adopt the tagging of a single node within the area, or delete the single node inside of the area. This can help to turn features that are mapped as nodes into ways that carry much more detail, in a much quicker manner. This toggle will not affect areas with multiple nodes inside of them.
+* **Node2Area**: a toggle that allows one to draw an area, either having the area adopt the tagging of a single node within the area (deleting the node as the tags of the node are now on the area), or delete the single node inside of the area without adopting its tags. This can help to turn features that are mapped as nodes into ways that carry much more detail, in a much quicker manner. This toggle will not affect areas with multiple nodes inside of them.
 
 ## Participate!
 
