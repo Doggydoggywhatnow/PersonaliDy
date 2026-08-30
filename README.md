@@ -29,7 +29,8 @@ Download PersonaliDy as a zip file, or clone it where you wish, then install npm
 
 ## Issues
 
- * The locator overlay is not and will not ever work; this is because it is a paid Mapbox API.
+* The locator overlay is not and will not ever work; this is because it is a paid Mapbox API.
+* It appears mapillary is not working.
 
 ## Did You Write Any of This Yourself?
 
