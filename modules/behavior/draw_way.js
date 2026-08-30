@@ -23,6 +23,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     var dispatch = d3_dispatch('rejectedSelfIntersection');
 
     var behavior = behaviorDraw(context);
+    behavior .dragToClick(false);
 
     // Must be set by `drawWay.nodeIndex` before each install of this behavior.
     var _nodeIndex;

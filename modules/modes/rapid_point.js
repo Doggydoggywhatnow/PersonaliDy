@@ -22,6 +22,7 @@ export function modeRapidPoint(context, mode) {
     };
 
     var behavior = behaviorDraw(context)
+	.dragToClick(false)
         .on('click', add)
         .on('clickWay', addWay)
         .on('clickNode', addNode)

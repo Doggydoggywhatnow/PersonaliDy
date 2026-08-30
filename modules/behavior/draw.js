@@ -35,6 +35,7 @@ export function behaviorDraw(context) {
 
     var _downPointer;
     var _dragPointTolerance = 16;
+    var _dragToClick = true;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -118,7 +119,10 @@ export function behaviorDraw(context) {
             if (dist >= _dragPointTolerance) {
     _downPointer.isDragging = true;
     dispatch.call('downcancel', this);
-    dispatch.call('click', this, context.projection.invert(p2), datum(d3_event));
+
+    if (_dragToClick) {
+        dispatch.call('click', this, context.projection.invert(p2), datum(d3_event));
+    }
     _lastMouse = d3_event;
 }
         }
@@ -296,6 +300,10 @@ dispatch.call('move', this, d3_event, datum(d3_event));
         return _hover;
     };
 
-
+behavior.dragToClick = function(_) {
+    if (!arguments.length) return _dragToClick;
+    _dragToClick = _;
+    return behavior;
+};
     return utilRebind(behavior, dispatch, 'on');
 }
