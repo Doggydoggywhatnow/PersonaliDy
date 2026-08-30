@@ -10,6 +10,10 @@ import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionMoveNode } from '../actions/move_node';
 import { actionNoop } from '../actions/noop';
 import { behaviorDraw } from './draw';
+import { actionChangeTags } from '../actions/change_tags';
+import { actionDeleteNode } from '../actions/delete_node';
+import { geoPointInPolygon } from '../geo';
+import { node2areaActive, node2areaMode } from '../core/node2area_state';
 import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
@@ -168,6 +172,41 @@ attemptAdd(null, loc, function() {
     // Check whether this edit causes the geometry to break.
     // If so, class the surface with a nope cursor.
     // `includeDrawNode` - Only check the relevant line segments if finishing drawing
+    function applyNode2Area(way) {
+        var graph = context.graph();
+        var wayNodeIds = new Set(way.nodes);
+        var polygon = way.nodes.map(function(id) {
+            return graph.entity(id).loc;
+        });
+
+        var extent = way.extent(graph);
+
+        var interiorNodes = context.history().intersects(extent).filter(function(entity) {
+            return entity.type === 'node' &&
+                !wayNodeIds.has(entity.id) &&
+                entity.geometry(graph) === 'point' &&
+                geoPointInPolygon(entity.loc, polygon);
+        });
+
+        if (interiorNodes.length !== 1) return;
+
+        var node = interiorNodes[0];
+        var mode = node2areaMode();
+
+        if (mode === 'merge') {
+            var mergedTags = Object.assign({}, way.tags, node.tags);
+            context.perform(
+                actionChangeTags(way.id, mergedTags),
+                actionDeleteNode(node.id),
+                'Merge node into area'
+            );
+        } else if (mode === 'delete') {
+            context.perform(
+                actionDeleteNode(node.id),
+                'Delete node inside area'
+            );
+        }
+    }
     function checkGeometry(includeDrawNode) {
         var nopeDisabled = context.surface().classed('nope-disabled');
         var isInvalid = isInvalidGeometry(includeDrawNode);
@@ -577,6 +616,10 @@ attemptAdd(null, loc, function() {
             context.map().dblclickZoomEnable(true);
         }, 1000);
 
+        // Node2Area: only applies to a just-finished area (closed way), never to lines
+        if (way.isClosed() && node2areaActive()) {
+            applyNode2Area(way);
+        }
         var isNewFeature = !mode.isContinuing;
         context.enter(modeSelect(context, [wayID]).newFeature(isNewFeature));
     };

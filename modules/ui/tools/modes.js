@@ -15,6 +15,7 @@ import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiModal } from '../modal';
+import { node2areaActive, node2areaMode, node2areaSetActive, node2areaSetMode } from '../../core/node2area_state';
 
 export function uiToolDrawModes(context) {
 
@@ -172,7 +173,12 @@ export function uiToolQuickdraw(context) {
     };
 
     tool.render = function(selection) {
-        selection
+       var wrap = selection
+           .append('div')
+           .attr('class', 'joined')
+           .style('display', 'flex');
+
+       wrap
             .append('button')
             .attr('class', 'quickdraw bar-button')
             .text('Quickdraw')
@@ -222,6 +228,57 @@ export function uiToolQuickdraw(context) {
                         }));
                     });
             });
+
+       var node2areaButton = wrap
+           .append('button')
+           .attr('class', 'node2area bar-button')
+           .text('Node2Area')
+           .classed('active', node2areaActive());
+
+       node2areaButton
+           .on('click.node2area', function() {
+
+               if (node2areaActive()) {
+                   node2areaSetActive(false);
+                   node2areaButton.classed('active', false);
+                   return;
+               }
+
+               var modal = uiModal(context.container());
+               var content = modal.select('.content');
+
+               content
+                   .append('div')
+                   .attr('class', 'modal-section header')
+                   .append('h3')
+                   .text('Node2Area');
+
+               var buttons = content
+                   .append('div')
+                   .attr('class', 'modal-section buttons cf');
+
+               buttons
+                   .append('button')
+                   .attr('class', 'button action')
+                   .text('Merge Nodes\' Tags')
+                   .on('click', function() {
+                       node2areaSetMode('merge');
+                       node2areaSetActive(true);
+                       node2areaButton.classed('active', true);
+                       modal.close();
+                   });
+
+               buttons
+                   .append('button')
+                   .attr('class', 'button action')
+                   .text('Delete Nodes')
+                   .on('click', function() {
+                       node2areaSetMode('delete');
+                       node2areaSetActive(true);
+                       node2areaButton.classed('active', true);
+                       modal.close();
+                   });
+           });
     };
 
     return tool;
