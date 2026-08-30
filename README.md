@@ -31,6 +31,10 @@ Download PersonaliDy as a zip file, or clone it where you wish, then install npm
 
  * The locator overlay is not and will not ever work; this is because it is a paid Mapbox API.
 
+## Did You Write Any of This Yourself?
+
+ No. I did what AI said to implement.
+
 ## License
 
 iD is available under the [ISC License](https://opensource.org/licenses/ISC).
