@@ -1,6 +1,7 @@
 import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 import { uiSectionPrivacy } from '../sections/privacy';
+import { uiSectionQuickdrawInterval } from '../sections/quickdraw_interval';
 
 export function uiPanePreferences(context) {
 
@@ -10,6 +11,7 @@ export function uiPanePreferences(context) {
     .description(t.append('preferences.description'))
     .iconName('fas-user-cog')
     .sections([
+	uiSectionQuickdrawInterval(context),
         uiSectionPrivacy(context)
     ]);
 

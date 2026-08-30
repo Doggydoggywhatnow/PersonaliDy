@@ -5,6 +5,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../presets';
+import { prefs } from '../core/preferences';
 import { t } from '../core/localizer';
 import { actionAddMidpoint } from '../actions/add_midpoint';
 import { actionMoveNode } from '../actions/move_node';
@@ -41,7 +42,11 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // The osmNode to be placed.
     // This is temporary and just follows the mouse cursor until an "add" event occurs.
     var _drawNode;
-    var _quickdrawDistance= 25;
+        function quickdrawInterval() {
+        var stored = prefs('quickdraw.interval');
+        var num = stored ? parseInt(stored, 10) : NaN;
+        return (isNaN(num) || num < 1) ? 25 : num;
+    }
 
     var _didResolveTempEdit = false;
 
@@ -160,7 +165,7 @@ var dx = currentScreen[0] - lastScreen[0];
 var dy = currentScreen[1] - lastScreen[1];
 var distance = Math.sqrt(dx * dx + dy * dy);
 
-if (distance < _quickdrawDistance) return;
+if (distance < quickdrawInterval()) return;
 
 attemptAdd(null, loc, function() {
     // Don't need to do anything extra
