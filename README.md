@@ -34,7 +34,7 @@ Download PersonaliDy as a zip file, or clone it where you wish, then install npm
 
 ## Did You Write Any of This Yourself?
 
- No. I did what AI said to implement.
+ No. I did what AI said to implement, based on the features I wished to add.
 
 ## License
 
